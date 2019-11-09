@@ -23,8 +23,6 @@ function getLinearGradient(context, color) {
 }
 
 function drawPolygon(points, context, color) {
-    // drawingSurface.strokeStyle = 'black';
-    // drawingSurface.lineWidth = 3;
     context.fillStyle = getLinearGradient(context, color);
 
     context.beginPath();
@@ -70,8 +68,8 @@ function draw() {
     context.clearRect(0, 0, width, height);
 
     drawPolygon(getSine(phase, width, 3), context, {r: 255, g: 59, b: 48});
-    drawPolygon(getSine(phase + 11, width, 5), context, {r: 66, g: 134, b: 244});
-    drawPolygon(getSine(phase + 13, width, 7), context, {r: 0, g: 150, b: 131});
+    drawPolygon(getSine(phase + width / 3, width, 5), context, {r: 66, g: 134, b: 244});
+    drawPolygon(getSine(phase + 2 * width / 3, width, 7), context, {r: 0, g: 150, b: 131});
     phase++;
 
     window.requestAnimationFrame(draw);
@@ -81,6 +79,6 @@ $(document).ready(function () {
     window.requestAnimationFrame(draw);
 });
 
-function mouseOver(element) {
+function mouseOver(element) { // Called by index.html
     element.focus();
 }
