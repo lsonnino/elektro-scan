@@ -80,3 +80,7 @@ function draw() {
 $(document).ready(function () {
     window.requestAnimationFrame(draw);
 });
+
+function mouseOver(element) {
+    element.focus();
+}
