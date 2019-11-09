@@ -1,0 +1,42 @@
+:root { /* GLOBAL VARIABLES */
+    --font: Avenir;
+
+    --window-color: rgb(50, 50, 50); /* Must be the same as the backgroundColor in main.js -> createWindow() */
+    --text-color: hsl(0, 0%, 70%);
+    --active-color: rgb(66, 134, 244);
+    --passive-color: var(--text-color);
+}
+
+.window {
+    background-color: var(--window-color);
+    font-family: var(--font);
+
+    -webkit-user-select: none;
+}
+
+#center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+p {
+    text-align: center;
+    color: var(--text-color);
+}
+
+.titlebar {
+    width: 110%;
+    height: 20pt;
+    background-color: transparent;
+    margin: -5pt;
+
+    -webkit-app-region: drag;
+}
+
+input {
+    -webkit-app-region: no-drag;
+}

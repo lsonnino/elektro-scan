@@ -1,0 +1,45 @@
+input {
+    color: var(--text-color);
+    background-color: transparent;
+
+    border-style: solid;
+    border-radius: 7pt;
+    border-color: var(--passive-color);
+    border-width: 1pt;
+
+    font-size: 10pt;
+
+    width: 160pt;
+    height: 40pt;
+
+    outline: none;
+
+    /* Transition */
+    transition-property: color, border-color;
+    transition-duration: 100ms;
+    transition-timing-function: ease-in-out;
+    transition-delay: 0s;
+}
+
+input:hover {
+    color: var(--active-color);
+    border-color: var(--active-color);
+
+    /* Transition */
+    transition-property: color, border-color;
+    transition-duration: 100ms;
+    transition-timing-function: ease-in-out;
+    transition-delay: 0s;
+}
+
+input:focus {
+    color: var(--active-color);
+    border-color: var(--active-color);
+}
+
+#text-field {
+    color: var(--text-color);
+
+    width: 150pt;
+    padding: 0pt 5pt;
+}

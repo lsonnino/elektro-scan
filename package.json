@@ -1,0 +1,22 @@
+{
+  "name": "elektro-scan",
+  "version": "1.0.0",
+  "description": "A network and domain scanner",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/lsonnino/elektro-scan",
+  "keywords": [
+    "Electron",
+    "nmap",
+    "port",
+    "ip",
+    "scan"
+  ],
+  "author": "lsonnino",
+  "license": "GNU General Public License v3.0",
+  "devDependencies": {
+    "electron": "^7.1.1"
+  }
+}
