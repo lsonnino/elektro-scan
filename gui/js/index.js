@@ -82,3 +82,15 @@ $(document).ready(function () {
 function mouseOver(element) { // Called by index.html
     element.focus();
 }
+
+var textField = document.getElementById("text-field");
+// Execute a function when the user releases a key on the keyboard
+textField.addEventListener("keyup", function(event) {
+    if (event.key == 'Enter') {
+        // Cancel the default action, if needed
+        event.preventDefault();
+        // Trigger the button element with a click
+        // TODO: check Domain name
+        window.location.href = 'not-supported.html' // TODO: implement DNS scan
+    }
+});
