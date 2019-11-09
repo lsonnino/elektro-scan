@@ -14,12 +14,12 @@ var lastFrameTime = Date.now();
 var phase = 0;
 
 function getLinearGradient(context, color) {
-    var grdient = context.createLinearGradient(0, height - (sineY + 2 * amplitude), 0, height);
+    var gradient = context.createLinearGradient(0, height - (sineY + 2 * amplitude), 0, height);
 
-    grdient.addColorStop(0, "rgba(" + [color.r, color.g, color.b, 0.7].join(",") + ")");
-    grdient.addColorStop(1, "rgba(" + [color.r, color.g, color.b, 0].join(",") + ")");
+    gradient.addColorStop(0, "rgba(" + [color.r, color.g, color.b, 0.7].join(",") + ")");
+    gradient.addColorStop(1, "rgba(" + [color.r, color.g, color.b, 0].join(",") + ")");
 
-    return grdient;
+    return gradient;
 }
 
 function drawPolygon(points, context, color) {
