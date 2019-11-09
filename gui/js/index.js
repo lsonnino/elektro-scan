@@ -1,7 +1,7 @@
 window.$ = window.jQuery = require('jquery');
 
 const FPS = 60;
-const speed = 0.25;
+const speed = 0.15;
 const sineY = 10;
 const amplitude = 25;
 
@@ -49,7 +49,7 @@ function getSine(phase, numberOfPoints, relativeFrequency){
                 - speed * phase / (2 * Math.PI)
             )
             + height - (amplitude + sineY);
-        yVal = yVal * (0.1 * Math.sin(2 * Math.PI * i / width + speed * phase / (2 * Math.PI)) + 1);
+        yVal = yVal * (0.1 * Math.sin(2 * Math.PI * i / width + speed * (relativeFrequency / 10) * phase / (2 * Math.PI)) + 1);
         points[i] = {x: i, y: yVal};
     }
     points[i++] = {x: width, y: height};
