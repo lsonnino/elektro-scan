@@ -24,12 +24,16 @@ function getLinearGradient(context, color) {
 
 function drawPolygon(points, context, color) {
     context.fillStyle = getLinearGradient(context, color);
+    context.strokeStyle = "rgba(" + [color.r, color.g, color.b, 0.9].join(",") + ")";
 
     context.beginPath();
 
     context.moveTo(points[0].x, points[0].y);
     for (var i = 1; i < points.length; i++) {
         context.lineTo(points[i].x, points[i].y);
+        if(i === points.length - 3) {
+            context.stroke();
+        }
     }
 
     context.closePath();
@@ -65,7 +69,7 @@ function draw() {
     lastFrameTime = Date.now();
 
     var context = canvas.getContext("2d");
-    context.clearRect(0, 0, width, height);
+    context.clearRect(0, 0, canvas.width, canvas.height);
 
     drawPolygon(getSine(phase, width, 3), context, {r: 255, g: 59, b: 48});
     drawPolygon(getSine(phase + width / 3, width, 5), context, {r: 66, g: 134, b: 244});

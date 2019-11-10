@@ -30,6 +30,7 @@ function getGradient(context, color) {
 
 function drawPolygon(points, context, color) {
     context.fillStyle = getGradient(context, color);
+    context.strokeStyle = "rgba(" + [color.r, color.g, color.b, 0.9].join(",") + ")";
 
     context.beginPath();
 
@@ -39,6 +40,7 @@ function drawPolygon(points, context, color) {
     }
 
     context.closePath();
+    context.stroke();
     context.fill();
 }
 
@@ -84,8 +86,8 @@ function draw() {
     context.clearRect(0, 0, width, height);
 
     drawPolygon(getSine(phase, 3), context, {r: 255, g: 59, b: 48});
-    drawPolygon(getSine(phase + width / 3, 5), context, {r: 66, g: 134, b: 244});
-    drawPolygon(getSine(phase + 2 * width / 3, 7), context, {r: 0, g: 150, b: 131});
+    drawPolygon(getSine(phase + width / 3, 4), context, {r: 66, g: 134, b: 244});
+    drawPolygon(getSine(phase + 2 * width / 3, 5), context, {r: 0, g: 150, b: 131});
     phase++;
 
     window.requestAnimationFrame(draw);
