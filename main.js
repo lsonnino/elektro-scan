@@ -24,7 +24,8 @@ function createWindow () {
             nodeIntegration: true
         },
         titleBarStyle: 'hidden',
-        backgroundColor: '#323232'  // rgb(50, 50, 50). Must be the same as --window-color in css/styles.css
+        backgroundColor: '#323232',  // rgb(50, 50, 50). Must be the same as --window-color in css/styles.css
+        icon: __dirname + '/icon/Icon.icns'
     })
 
     // and load the index.html of the app.
