@@ -1,12 +1,15 @@
 .table-container{
-    width: 100px;
-    padding: 10pt 30pt 20pt;
+    width: 100%;
+    margin: 10pt 30pt 20pt;
 }
 
 table {
-    /*width: 100%;*/
+    width: 100%;
     height: 100%;
-    /*border-collapse: collapse;*/
+    border-collapse: collapse;
+    /*border-spacing: 0;*/
+    /*table-layout: fixed;*/
+    padding: 0 50px 0 50px;
 }
 
 tr {
@@ -30,5 +33,14 @@ th {
     text-transform: uppercase;
     letter-spacing: 2pt;
 
+    background-image: linear-gradient(to bottom, var(--window-color) 80%, transparent);;
+
     padding-bottom: 10pt;
+
+    /* Make the header stay when scrolling */
+    position: -webkit-sticky; /* this is for all Safari (Desktop & iOS), not for Chrome */
+    position: sticky;
+    top: 10pt;
+    z-index: 5;
+    align-self: flex-start;
 }
