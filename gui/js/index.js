@@ -90,7 +90,7 @@ function mouseOver(element) { // Called by index.html
 var textField = document.getElementById("text-field");
 // Execute a function when the user releases a key on the keyboard
 textField.addEventListener("keyup", function(event) {
-    if (event.key == 'Enter') {
+    if (event.key === 'Enter') {
         // Cancel the default action, if needed
         event.preventDefault();
         // Trigger the button element with a click

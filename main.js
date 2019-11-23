@@ -1,5 +1,5 @@
 const { app, BrowserWindow } = require('electron')
-const Store = require('./util/store.js')
+const Store = require('./gui/js/store.js')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.

@@ -5,98 +5,109 @@ const speed = 0.25;
 const amplitude = 7;
 const baseRadius = 50;
 
-var canvas = document.getElementById("loading");
-canvas.setAttribute('width', '300');
-canvas.setAttribute('height', '300');
-var width = canvas.width;
-var height = canvas.height;
+class Loading {
+    constructor(){
+        this.canvas = document.getElementById("loading");
+        this.canvas.setAttribute('width', '300');
+        this.canvas.setAttribute('height', '300');
 
-var lastFrameTime = Date.now();
+        this.width = this.canvas.width;
+        this.height = this.canvas.height;
 
-var phase = 0;
-var running = true;
+        this.lastFrameTime = Date.now();
 
-function getGradient(context, color) {
-    var gradient = context.createRadialGradient(
-        width / 2, height / 2, baseRadius - amplitude -15,
-        width / 2, height / 2, baseRadius + amplitude
-    );
-
-    gradient.addColorStop(0, "rgba(" + [color.r, color.g, color.b, 0].join(",") + ")");
-    gradient.addColorStop(1, "rgba(" + [color.r, color.g, color.b, 0.7].join(",") + ")");
-
-    return gradient;
-}
-
-function drawPolygon(points, context, color) {
-    context.fillStyle = getGradient(context, color);
-    context.strokeStyle = "rgba(" + [color.r, color.g, color.b, 0.9].join(",") + ")";
-
-    context.beginPath();
-
-    context.moveTo(points[0].x, points[0].y);
-    for (var i = 1; i < points.length; i++) {
-        context.lineTo(points[i].x, points[i].y);
+        this.phase = 0;
+        this.running = false;
     }
 
-    context.closePath();
-    context.stroke();
-    context.fill();
-}
+    start(){
+        this.canvas.style.display = "block";
+        this.running = true;
 
-function radialToCarthesian(theta, r){
-    return {
-        x: r * Math.cos(2 * Math.PI * theta / 360) + width / 2,
-        y: r * Math.sin(2 * Math.PI * theta / 360) + height / 2
-    };
-}
+        window.requestAnimationFrame(this.draw.bind(this));
+    }
 
-function getSine(phase, relativeFrequency){
-    var points = [360];
+    stop() {
+        this.running = false;
+        this.canvas.style.display = "none";
+    }
 
-    var theta;
-    for(theta = 0 ; theta < 360 ; theta++){
-        var r = baseRadius + amplitude * Math.sin(
-            2 * Math.PI * relativeFrequency * theta / 360
-            - speed * phase / (2 * Math.PI)
+    getGradient(context, color) {
+        var gradient = context.createRadialGradient(
+            this.width / 2, this.height / 2, baseRadius - amplitude -15,
+            this.width / 2, this.height / 2, baseRadius + amplitude
         );
-        r = r * (1 + 0.1 * Math.sin(2 * Math.PI * theta / 360 + speed * (relativeFrequency / 10) * phase / (2 * Math.PI)));
 
-        points[theta] = radialToCarthesian(theta, r);
+        gradient.addColorStop(0, "rgba(" + [color.r, color.g, color.b, 0].join(",") + ")");
+        gradient.addColorStop(1, "rgba(" + [color.r, color.g, color.b, 0.7].join(",") + ")");
+
+        return gradient;
     }
 
-    return points;
-}
+    drawSine(points, context, color) {
+        context.fillStyle = this.getGradient(context, color);
+        context.strokeStyle = "rgba(" + [color.r, color.g, color.b, 0.9].join(",") + ")";
 
-function draw() {
-    if(!running){
-        var context = canvas.getContext("2d");
-        context.clearRect(0, 0, width, height);
-        return;
+        context.beginPath();
+
+        context.moveTo(points[0].x, points[0].y);
+        for (var i = 1; i < points.length; i++) {
+            context.lineTo(points[i].x, points[i].y);
+        }
+
+        context.closePath();
+        context.stroke();
+        context.fill();
     }
 
-    if(Date.now() - lastFrameTime < 1000 / FPS){
-        window.requestAnimationFrame(draw);
-        return;
+    radialToCarthesian(theta, r){
+        return {
+            x: r * Math.cos(2 * Math.PI * theta / 360) + this.width / 2,
+            y: r * Math.sin(2 * Math.PI * theta / 360) + this.height / 2
+        };
     }
 
-    lastFrameTime = Date.now();
+    getSine(phase, relativeFrequency){
+        var points = [360];
 
-    var context = canvas.getContext("2d");
-    context.clearRect(0, 0, width, height);
+        var theta;
+        for(theta = 0 ; theta < 360 ; theta++){
+            var r = baseRadius + amplitude * Math.sin(
+                2 * Math.PI * relativeFrequency * theta / 360
+                - speed * phase / (2 * Math.PI)
+            );
+            r = r * (1 + 0.1 * Math.sin(2 * Math.PI * theta / 360 + speed * (relativeFrequency / 10) * phase / (2 * Math.PI)));
 
-    drawPolygon(getSine(phase, 3), context, {r: 255, g: 59, b: 48});
-    drawPolygon(getSine(phase + width / 3, 4), context, {r: 66, g: 134, b: 244});
-    drawPolygon(getSine(phase + 2 * width / 3, 5), context, {r: 0, g: 150, b: 131});
-    phase++;
+            points[theta] = this.radialToCarthesian(theta, r);
+        }
 
-    window.requestAnimationFrame(draw);
+        return points;
+    }
+
+    draw() {
+        if(!this.running){
+            var context = this.canvas.getContext("2d");
+            context.clearRect(0, 0, this.width, this.height);
+            return;
+        }
+
+        if(Date.now() - this.lastFrameTime < 1000 / FPS){
+            window.requestAnimationFrame(this.draw.bind(this));
+            return;
+        }
+
+        this.lastFrameTime = Date.now();
+
+        var context = this.canvas.getContext("2d");
+        context.clearRect(0, 0, this.width, this.height);
+
+        this.drawSine(this.getSine(this.phase, 3), context, {r: 255, g: 59, b: 48});
+        this.drawSine(this.getSine(this.phase + this.width / 3, 4), context, {r: 66, g: 134, b: 244});
+        this.drawSine(this.getSine(this.phase + 2 * this.width / 3, 5), context, {r: 0, g: 150, b: 131});
+        this.phase++;
+
+        window.requestAnimationFrame(this.draw.bind(this));
+    }
 }
 
-$(document).ready(function () {
-    window.requestAnimationFrame(draw);
-});
-
-function stop() {
-    running = false;
-}
+module.exports = Loading;
