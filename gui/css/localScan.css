@@ -1,5 +1,34 @@
+.table-container{
+    width: 100px;
+    padding: 10pt 30pt 20pt;
+}
 
-#loading {
-    width: 300px;
-    height: 300px;
+table {
+    /*width: 100%;*/
+    height: 100%;
+    /*border-collapse: collapse;*/
+}
+
+tr {
+    text-align: center;
+    color: var(--text-color);
+
+    border-bottom: 1pt solid var(--text-color-transparent);
+    margin: 0pt 10pt;
+}
+
+td {
+    padding: 10pt 0pt;
+}
+
+tr:last-child {
+    border-bottom: none;
+}
+
+th {
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2pt;
+
+    padding-bottom: 10pt;
 }

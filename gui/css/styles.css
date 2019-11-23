@@ -3,6 +3,7 @@
 
     --window-color: rgb(50, 50, 50); /* Must be the same as the backgroundColor in main.js -> createWindow() */
     --text-color: hsl(0, 0%, 70%);
+    --text-color-transparent: hsl(0, 0%, 50%);
     --active-color: rgb(66, 134, 244);
     --passive-color: var(--text-color);
 }
@@ -21,6 +22,14 @@
     -moz-transform: translateX(-50%) translateY(-50%);
     -webkit-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
+}
+
+#h-center {
+    position: absolute;
+    left: 50%;
+    -moz-transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
 }
 
 p {
@@ -43,4 +52,9 @@ p {
 
 input {
     -webkit-app-region: no-drag;
+}
+
+#loading {
+    width: 300px;
+    height: 300px;
 }

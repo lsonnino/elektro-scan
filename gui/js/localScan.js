@@ -67,7 +67,7 @@ function getData(host){
             if (error){
                 alert(error);
                 data.push({ip: host.ip, mac: "", vendor: "", name: ""});
-                fillTable(data);
+                done(data);
                 return;
             }
 
@@ -81,7 +81,7 @@ function getData(host){
             var index = out.indexOf(IP_PHRASE);
             if(index < 0){
                 data.push({ip: host.ip, mac: "", vendor: "", name: ""});
-                fillTable(data);
+                done(data);
                 return;
             }
 
