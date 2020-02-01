@@ -4,7 +4,7 @@
 }
 
 table {
-    width: 100%;
+    width: 85%;
     height: 100%;
     border-collapse: collapse;
     /*border-spacing: 0;*/
@@ -33,14 +33,29 @@ th {
     text-transform: uppercase;
     letter-spacing: 2pt;
 
-    background-image: linear-gradient(to bottom, var(--window-color) 80%, transparent);;
+    background-image: linear-gradient(to bottom, var(--window-color) 80%, transparent);
 
     padding-bottom: 10pt;
+    padding-top: 10pt;
+
+    -webkit-app-region: drag;
 
     /* Make the header stay when scrolling */
     position: -webkit-sticky; /* this is for all Safari (Desktop & iOS), not for Chrome */
     position: sticky;
-    top: 10pt;
+    top: 0pt;
     z-index: 5;
     align-self: flex-start;
+}
+
+
+.bottom-gradient {
+    width: 100%;
+    height: 20pt;
+
+    position: fixed;
+    bottom: 0;
+
+    background-image: linear-gradient(to top, var(--window-color) 80%, transparent);
+    z-index: 5;
 }

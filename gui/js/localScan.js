@@ -4,7 +4,7 @@ const Loading = require("./js/loading");
 var sudo = require('sudo-prompt');
 var options = {
     name: 'electroscan'
-    // icns: '/Applications/Electron.app/Contents/Resources/Electron.icns', // (optional)
+    // icns: '/Applications/Electron.app/Contents/Resources/Electron.icns' // (optional)
 };
 
 var host = {ip: null, netmask: -1};
@@ -13,6 +13,18 @@ var data = [];
 var loading = new Loading();
 
 const NO_NAME = "None";
+
+window.onscroll = function(ev) {
+    let table = document.getElementsByClassName("table-container");
+    if($(this).scrollY + $(this).innerHeight() >= table.scrollHeight) {
+        alert('if');
+        document.getElementById("bottom").style.display = 'none';
+    }
+    else {
+        alert('else');
+        document.getElementById("bottom").style.display = 'block';
+    }
+};
 
 
 function getBitsNumber(hexString){
@@ -98,6 +110,8 @@ function getData(host){
                 var vendor = out.slice(VENDOR_PHRASE.length, out.indexOf(VENDOR_END));
 
                 data.push({ip: ip, mac: mac, vendor: vendor});
+                // todo: uncomment for debug, remove if unnecessary
+                // data.push({ip: ip + '-copy', mac: mac, vendor: vendor});
 
                 index = out.indexOf(IP_PHRASE)
             }
@@ -112,6 +126,7 @@ function getData(host){
 function done(data){
     fillTable(data);
     loading.stop();
+    document.getElementById("bottom").style.display = 'block';
 }
 
 function generateTableHead(table, data) {
@@ -143,6 +158,7 @@ function fillTable(content){
     generateTable(table, content);
 }
 
+document.getElementById("bottom").style.display = 'none';
 loading.start();
 getNetworkInfo();
 if(host.ip != null){
